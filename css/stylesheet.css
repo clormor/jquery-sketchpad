@@ -1,0 +1,5 @@
+/* Make the main content centered in the page */
+#wrap {
+	width: 600px;
+	margin: 0 auto;
+}
