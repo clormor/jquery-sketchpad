@@ -1,5 +1,16 @@
 /* Make the main content centered in the page */
 #wrap {
-	width: 600px;
+	width: 640px;
 	margin: 0 auto;
+}
+
+
+#grid {
+	line-height: 0;
+}
+
+.grid-square {
+	background-color: #eee;
+	display: inline-block;
+	line-height: 0;
 }

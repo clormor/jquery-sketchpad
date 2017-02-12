@@ -1,55 +1,51 @@
-var imgCounter = 0
-var fadeTime = 500
-var loopTime = 5000
-var loop, numImages
+var gridSquares = 0
+var gridSquareSize = 0
+var gridSizePx = 0
+var gridTargetSizePx = 600
+var squaresPerRow = 0
+var borderSize = 0
 
 $(document).ready(function() {
-	// Start the slideshow
-	countImages()
-	showNextImage()
-	startSlide()
-
-	// Stop the slideshow when user hovers over the current image
-	$('#slider > img').hover(function() {stopSlide()}, function() {startSlide()})
-
-	// Show previous slide when user clicks Prev
-	$('#prev').click(function() {
-		stopSlide()
-		showPrevImage()
-		startSlide()
-	})
-
-	// Show next slide when user clicks Next
-	$('#next').click(function() {
-		stopSlide()
-		showNextImage()
-		startSlide()
-	})
+	resizeGrid(64, 1)
+	drawGrid()
 });
 
-// Count the images in the slider (so we can add images w/o having to update JavaScript)
-var countImages = function() {
-	numImages = $('#slider > img').length
+var resizeGrid = function(numSquares, border) {
+	gridSquares = numSquares
+	borderSize = border
+	squaresPerRow = Math.sqrt(gridSquares)
+	gridSquareSize = Math.floor(gridTargetSizePx / squaresPerRow) - borderSize
+	gridSizePx = (gridSquareSize * squaresPerRow) + borderSize + (squaresPerRow * borderSize)
+	$('#grid').height(gridSizePx)
+	$('#grid').width(gridSizePx)
 }
 
-// show the next image (called by the timer, and when user clicks Next)
-var showNextImage = function() {
-	$('#slider > #' + Math.abs(imgCounter % numImages)).fadeOut(fadeTime)
-	$('#slider > #' + Math.abs(++imgCounter % numImages)).fadeIn(fadeTime * 2)
+var drawGrid = function() {
+	for (var i = 0; i < gridSquares; i++) {
+		var square = document.createElement('div')
+		square.setAttribute("class", "grid-square")
+		square.setAttribute("id", "square-" + i)
+		$('#grid').append(square)
+		setSquareBorder(i)
+	}
+	$('.grid-square').height(gridSquareSize)
+	$('.grid-square').width(gridSquareSize)
 }
 
-// show previous image (called when user clicks Prev)
-var showPrevImage = function() {
-	$('#slider > #' + Math.abs(imgCounter % numImages)).fadeOut(fadeTime)
-	$('#slider > #' + Math.abs(--imgCounter % numImages)).fadeIn(fadeTime * 2)
-}
+var setSquareBorder = function(squareNum) {
+	var rowNum = Math.floor(squareNum / squaresPerRow)
+	var colNum = squareNum % squaresPerRow
 
-// (re)start the timer
-var startSlide = function() {
-	loop = setInterval(showNextImage, loopTime)
-}
+	if (colNum == 0) {
+		$('#square-' + squareNum).css({"border-left": borderSize + "px dashed black"})
+	}
 
-// Stop the timer when user clicks to prevent jerkiness
-var stopSlide = function() {
-	clearInterval(loop)
+	if (rowNum == 0) {
+		$('#square-' + squareNum).css({"border-top": borderSize + "px dashed black"})
+	}
+
+	$('#square-' + squareNum).css({"border-bottom": borderSize + "px dashed black"})
+	$('#square-' + squareNum).css({"border-right": borderSize + "px dashed black"})
+	$('#square-' + squareNum).height(gridSquareSize - (2 * borderSize))
+	$('#square-' + squareNum).width(gridSquareSize - (2 * borderSize))
 }
