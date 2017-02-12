@@ -1,5 +1,5 @@
 * {
-	font: 13px normal Arial, sans-serif;
+	font: 16px normal Arial, sans-serif;
 }
 
 #wrap {
@@ -18,15 +18,19 @@
 
 #intro > p {
 	margin: 10px 0;
+	line-height: 1.5;
 }
 
 
 #intro > ul > li {
-	margin: 5px 0;
+	margin: 0 30px;
+	line-height: 1.5;
+	/*padding: ;*/
 }
 
 #intro {
 	margin: 40px auto;
+	padding: 0 20px;
 }
 
 #grid {
