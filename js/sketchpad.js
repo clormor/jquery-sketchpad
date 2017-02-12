@@ -1,23 +1,48 @@
-var gridSquares = 0
+var gridSquares = 4
 var gridSquareSize = 0
 var gridSizePx = 0
-var gridTargetSizePx = 600
+var gridTargetSizePx = 380
 var squaresPerRow = 0
-var borderSize = 0
+var borderSize = 1
 
 $(document).ready(function() {
-	resizeGrid(64, 1)
-	drawGrid()
+	drawSlider()
+	drawToggle()
+	resizeGrid()
 });
 
-var resizeGrid = function(numSquares, border) {
-	gridSquares = numSquares
-	borderSize = border
+var resizeGrid = function() {
+	$( ".grid-square" ).remove();
+
+	numSquares = $("#slider").slider("value")
+	borderSize = ($('.toggle').data('toggle-active')) ? 1 : 0
+	
+	gridSquares = numSquares * numSquares
 	squaresPerRow = Math.sqrt(gridSquares)
 	gridSquareSize = Math.floor(gridTargetSizePx / squaresPerRow) - borderSize
 	gridSizePx = (gridSquareSize * squaresPerRow) + borderSize + (squaresPerRow * borderSize)
 	$('#grid').height(gridSizePx)
 	$('#grid').width(gridSizePx)
+	drawGrid()
+}
+
+var drawSlider = function() {
+	$( "#slider" ).slider({
+		max: 50,
+		min: 2,
+		value: 4,
+		change: function(event, ui) {
+        	resizeGrid()
+    	},
+	});
+}
+
+var drawToggle = function() {
+	$('#toggle').toggles({on:true});
+
+	$('.toggle').on('toggle', function(e, active) {
+		resizeGrid()
+	});
 }
 
 var drawGrid = function() {
@@ -30,6 +55,10 @@ var drawGrid = function() {
 	}
 	$('.grid-square').height(gridSquareSize)
 	$('.grid-square').width(gridSquareSize)
+
+	$('.grid-square').mouseover(function() {
+		$(this).css({"background-color": "red"})
+	})
 }
 
 var setSquareBorder = function(squareNum) {

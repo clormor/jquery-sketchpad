@@ -1,16 +1,56 @@
-/* Make the main content centered in the page */
+* {
+	font: 13px normal Arial, sans-serif;
+}
+
 #wrap {
 	width: 640px;
 	margin: 0 auto;
 }
 
+#intro > p > a {
+	text-decoration: none;
+}
+
+#intro > h1 {
+	font: 24px bold Arial, sans-serif;
+	margin: 20px 0;
+}
+
+#intro > p {
+	margin: 10px 0;
+}
+
+
+#intro > ul > li {
+	margin: 5px 0;
+}
+
+#intro {
+	margin: 40px auto;
+}
 
 #grid {
 	line-height: 0;
+	margin: 40px auto;
 }
 
 .grid-square {
 	background-color: #eee;
 	display: inline-block;
 	line-height: 0;
+}
+
+#slider {
+	width: 50%;
+	margin: 40px auto;
+}
+
+#toggle {
+	width: 60px;
+	margin: 40px auto;
+}
+
+#footer {
+	background-color: #f5f5f5;
+	border-top: 1px solid #d5d5d5;
 }
