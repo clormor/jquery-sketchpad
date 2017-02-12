@@ -1,7 +1,7 @@
 var gridSquares = 4
 var gridSquareSize = 0
 var gridSizePx = 0
-var gridTargetSizePx = 380
+var gridTargetSizePx = 500
 var squaresPerRow = 0
 var borderSize = 1
 
