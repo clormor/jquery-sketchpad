@@ -1,7 +1,6 @@
 var gridSquares = 4
 var gridSquareSize = 0
 var gridSizePx = 0
-var gridTargetSizePx = 500
 var squaresPerRow = 0
 var borderSize = 1
 
@@ -14,12 +13,11 @@ $(document).ready(function() {
 var resizeGrid = function() {
 	$( ".grid-square" ).remove();
 
-	numSquares = $("#slider").slider("value")
+	squaresPerRow = $("#slider").slider("value")
 	borderSize = ($('.toggle').data('toggle-active')) ? 1 : 0
 	
-	gridSquares = numSquares * numSquares
-	squaresPerRow = Math.sqrt(gridSquares)
-	gridSquareSize = Math.floor(gridTargetSizePx / squaresPerRow) - borderSize
+	gridSquares = squaresPerRow * squaresPerRow
+	gridSquareSize = ($('#grid').height() / squaresPerRow) - borderSize
 	gridSizePx = (gridSquareSize * squaresPerRow) + borderSize + (squaresPerRow * borderSize)
 	$('#grid').height(gridSizePx)
 	$('#grid').width(gridSizePx)
